@@ -13,7 +13,7 @@ function NavBar() {
   const [isDesktop, setDesktop] = useState(window.innerWidth > 650)
 
   const updateMedia = () => {
-    setDesktop(window.innerWidth > 650)
+    setDesktop(window.innerWidth > 640)
   }
 
   useEffect(() => {

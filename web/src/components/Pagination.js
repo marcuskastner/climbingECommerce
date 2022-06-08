@@ -43,8 +43,8 @@ const Pagination = ({ images }) => {
         tw="flex justify-center items-center gap-10 "
       >
         <FontAwesomeIcon
+          className="fa-2x"
           icon={faCircleArrowLeft}
-          tw="w-[4rem]"
           onClick={() => paginate(-1)}
         />
 
@@ -62,6 +62,7 @@ const Pagination = ({ images }) => {
           </AnimatePresence>
         </div>
         <FontAwesomeIcon
+          className="fa-2x"
           icon={faCircleArrowRight}
           onClick={() => paginate(1)}
         />

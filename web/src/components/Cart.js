@@ -33,7 +33,7 @@ function Cart() {
           exit="exit"
           initial="hidden"
           variants={variants}
-          tw=" bg-white z-10 w-[75%] md:(w-[50%] top-10) absolute right-0 top-0 h-[100%] "
+          tw=" bg-white z-10 w-[75%] sm:(w-[50%] top-10 right-8) absolute right-0 top-0 h-[100%] border-2 border-solid border-b-gray-500 "
         >
           {cart.length > 0 ? (
             <div tw="w-[100%]">
@@ -75,4 +75,4 @@ function Cart() {
 
 export default Cart
 
-const CheckoutButton = tw.button`w-[20rem] h-[3rem] bg-[#215140] text-white`
+const CheckoutButton = tw.button`w-[18rem] h-[3rem] bg-[#215140] text-white`

@@ -44,40 +44,47 @@ const ProductTemplate = ({ data }) => {
   return (
     <div
       className="main_container"
-      tw=" md:(flex justify-around gap-10)  mt-10 p-4"
+      tw=" lg:(grid grid-cols-3)gap-10 flex flex-col mt-10 p-4 justify-center"
     >
-      <div className="left">
-        <Pagination images={images} />
-        <p tw="mt-10">{Product.desc[0].children[0].text}</p>
-      </div>
-      <div className="right">
-        <h1>{Product.name}</h1>
+      <div className="right" tw="lg:(order-last col-span-1)">
+        <h1 tw="text-4xl font-bold mb-4">{Product.name}</h1>
         <StarRatings
           rating={Product.rating}
           numberOfStars={5}
-          starRatedColor="red"
+          starRatedColor="#EF8B23"
           starEmptyColor="grey"
+          starDimension="30px"
         />
-        <p>{Product.price}</p>
-        <p>{Product.options[0].optionName}</p>
-        <div tw="flex gap-4">
+        <p tw="text-3xl font-bold my-4">${Product.price}</p>
+        <p tw="text-2xl font-semibold mb-2">{Product.options[0].optionName}</p>
+        <div tw="flex gap-4 mb-4">
           {Product.options[0].optionValues.map((value, i) => (
             <div
               style={
                 selectedOption === i
-                  ? { padding: "0.5rem 1rem", border: "2px solid red" }
-                  : { padding: "0.5rem 1rem", border: "2px solid grey" }
+                  ? {
+                      padding: "0.5rem 1rem",
+                      border: "2px solid red",
+                      borderRadius: "5%",
+                      marginBottom: "0.5rem",
+                    }
+                  : {
+                      padding: "0.5rem 1rem",
+                      border: "2px solid grey",
+                      borderRadius: "5%",
+                      marginBottom: "0.5rem",
+                    }
               }
               onClick={() => {
                 setSelectedOption(i)
               }}
             >
-              {value}
+              <span tw="font-semibold">{value}</span>
             </div>
           ))}
         </div>
-        <p>Quantity</p>
-        <div tw="flex items-center justify-center gap-4 mb-8">
+        <p tw="text-2xl font-semibold mb-2">Quantity</p>
+        <div tw="flex items-center  gap-4 mb-8">
           <button
             onClick={() =>
               quantity > 1 ? setQuantity(quantity - 1) : setQuantity(1)
@@ -85,7 +92,7 @@ const ProductTemplate = ({ data }) => {
           >
             <FontAwesomeIcon icon={faCircleMinus} />
           </button>
-          <div tw="border-2 border-solid  border-black px-4 py-4">
+          <div tw="border-2 border-solid  border-gray-500 rounded-[10%] px-8 py-3">
             {quantity}
           </div>
           <button onClick={() => setQuantity(quantity + 1)}>
@@ -131,6 +138,10 @@ const ProductTemplate = ({ data }) => {
         >
           Add to Cart
         </CartButton>
+      </div>
+      <div className="left" tw="lg:col-span-2">
+        <Pagination images={images} />
+        <p tw="px-8 mt-10">{Product.desc[0].children[0].text}</p>
       </div>
     </div>
   )
