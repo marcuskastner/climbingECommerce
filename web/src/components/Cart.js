@@ -1,10 +1,12 @@
-import React from "react"
+import React, { useEffect } from "react"
 import tw from "twin.macro"
 import { motion, AnimatePresence } from "framer-motion"
 import { useStateContext } from "../context/StateContext"
 import { GatsbyImage } from "gatsby-plugin-image"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faCircleXmark } from "@fortawesome/free-solid-svg-icons"
 function Cart() {
-  const { showCart, cart } = useStateContext()
+  const { showCart, cart, setCart } = useStateContext()
 
   const variants = {
     visible: { opacity: 1 },
@@ -25,6 +27,7 @@ function Cart() {
     return total
   }
   const totalPrice = calcTotalPrice()
+
   return (
     <AnimatePresence>
       {showCart && (
@@ -33,39 +36,63 @@ function Cart() {
           exit="exit"
           initial="hidden"
           variants={variants}
-          tw=" bg-white z-10 w-[75%] sm:(w-[50%] top-10 right-8) absolute right-0 top-0 h-[100%] border-2 border-solid border-b-gray-500 "
+          tw=" bg-white z-10 w-[100%] top-14 sm:(max-w-[400px] top-10 right-8) absolute right-0  border-2 border-solid  "
         >
           {cart.length > 0 ? (
-            <div tw="w-[100%]">
-              <div tw="flex justify-between">
-                <div>
-                  <span>{totalItems}</span>
-                  <span>items in cart</span>
+            <div tw="flex flex-col gap-4 p-4 divide-y-[2px]">
+              <div tw="pt-2">
+                <div tw="flex justify-between">
+                  <div>
+                    <span tw="text-[1.25rem] font-semibold">{totalItems}</span>
+                    <span tw="text-[1.25rem]">
+                      {" "}
+                      {totalItems > 1 ? "items" : "item"} in cart
+                    </span>
+                  </div>
+
+                  <div tw="flex flex-col items-end">
+                    <p tw="text-[1.25rem] mb-0 ">Cart Subtotal:</p>
+                    <p tw="text-[1.25rem] mb-2 font-bold ">${totalPrice}</p>
+                  </div>
                 </div>
-                <div>
-                  <p>Cart Subtotal</p>
-                  <p>${totalPrice}</p>
+                <div tw="flex justify-center">
+                  <CheckoutButton>Proceed to Checkout</CheckoutButton>
                 </div>
               </div>
-              <CheckoutButton>Proceed to Checkout</CheckoutButton>
               {cart.map(item => (
-                <div tw="flex justify-between">
+                <div tw="flex justify-between items-center gap-4 pt-2">
                   <div tw="w-[20%]">
                     <GatsbyImage image={item.image} />
                   </div>
                   <div tw="flex flex-col w-[70%]">
-                    <p>{item.name}</p>
-                    <p>{item.price}</p>
-                    <p>
+                    <span>{item.name}</span>
+                    <span>{item.price}</span>
+                    <span>
                       {item.optionName}: {item.optionValue}
-                    </p>
-                    <p>Qty: {item.quantity}</p>
+                    </span>
+                    <span>Qty: {item.quantity}</span>
                   </div>
+                  <FontAwesomeIcon
+                    icon={faCircleXmark}
+                    onClick={() =>
+                      setCart(
+                        cart.filter(cartItem => {
+                          if (
+                            cartItem.id !== item.id ||
+                            cartItem.optionIndex !== item.optionIndex
+                          )
+                            return cartItem
+                        })
+                      )
+                    }
+                  />
                 </div>
               ))}
             </div>
           ) : (
-            "nothing to show"
+            <div tw="flex justify-center">
+              <p tw="text-xl p-4 mb-0">You do not have any items in the cart</p>
+            </div>
           )}
         </motion.div>
       )}

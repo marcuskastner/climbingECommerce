@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { graphql } from "gatsby"
 
 import Seo from "../components/seo"
@@ -6,6 +6,7 @@ import Product from "../components/Product"
 import { GatsbyImage } from "gatsby-plugin-image"
 import tw from "twin.macro"
 import Title from "../components/Title"
+import { useStateContext } from "../context/StateContext"
 
 export const query = graphql`
   query IndexPageQuery {
@@ -60,6 +61,8 @@ const IndexPage = props => {
   const site = data.site
   const index = data.index
   const imageData = index.mainImage[0].asset.gatsbyImageData
+  const { setShowCart } = useStateContext()
+  useEffect(() => setShowCart(false), [])
 
   return (
     <>
