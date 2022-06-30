@@ -1,8 +1,7 @@
 import * as React from "react"
 import { motion } from "framer-motion"
-import { useStateContext } from "../context/StateContext"
-import tw from "twin.macro"
-import Item from "./Item"
+import { useStateContext } from "../../context/StateContext"
+import MenuItem from "./MenuItem"
 
 const variants = {
   open: {
@@ -13,13 +12,13 @@ const variants = {
   },
 }
 
-const MenuItem = () => {
+const SideBarMenu = () => {
   const { isOpen } = useStateContext()
   return (
     <motion.ui animate={isOpen ? "open" : "closed"} variants={variants}>
-      <Item />
+      <MenuItem />
     </motion.ui>
   )
 }
 
-export default MenuItem
+export default SideBarMenu

@@ -1,11 +1,10 @@
 import React, { useEffect } from "react"
 import { graphql } from "gatsby"
-
 import Seo from "../components/seo"
-import Product from "../components/Product"
+import ProductCard from "../components/molecule/ProductCard"
 import { GatsbyImage } from "gatsby-plugin-image"
 import tw from "twin.macro"
-import Title from "../components/Title"
+import Hero from "../components/molecule/Hero"
 import { useStateContext } from "../context/StateContext"
 
 export const query = graphql`
@@ -55,11 +54,9 @@ export const query = graphql`
   }
 `
 
-const IndexPage = props => {
-  const { data } = props
+const IndexPage = ({ data }) => {
   const products = data.product.edges.map(edge => edge.node)
-  const site = data.site
-  const index = data.index
+  const { site, index } = data
   const imageData = index.mainImage[0].asset.gatsbyImageData
   const { setShowCart } = useStateContext()
   useEffect(() => setShowCart(false), [])
@@ -69,20 +66,20 @@ const IndexPage = props => {
       <Seo site={site} />
 
       <div tw="relative mb-10 ">
+        {/* twin does not work on Gatsby Components */}
         <GatsbyImage image={imageData} alt="main index image" />
-        <Title />
+        <Hero />
       </div>
-      <div tw="flex justify-center items-center ">
-        <div tw="xl:(grid gap-24 grid-cols-2) flex flex-col items-center gap-20">
-          {products.map(product => (
-            <Product product={product} key={product.id} />
-          ))}
-        </div>
-      </div>
+
+      <ProductContainer>
+        {products.map(product => (
+          <ProductCard product={product} key={product.id} />
+        ))}
+      </ProductContainer>
     </>
   )
 }
 
-const Button = tw.button`md:(w-[8rem] h-[2.35rem] bg-white text-black font-semibold text-[1rem]) `
-
 export default IndexPage
+
+const ProductContainer = tw.div`lg:(flex-row gap-24  ) flex flex-col items-center gap-20 justify-center`

@@ -1,8 +1,8 @@
 import tw from "twin.macro"
 import React from "react"
 import { motion } from "framer-motion"
-import { useStateContext } from "../context/StateContext"
-export const MenuToggle = ({ toggle }) => {
+import { useStateContext } from "../../context/StateContext"
+export const SideBarToggle = ({ toggle }) => {
   const { isOpen } = useStateContext()
   return (
     <button tw="px-4 py-4" onClick={toggle}>

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import tw from "twin.macro"
 import { motion, AnimatePresence } from "framer-motion"
-import { useStateContext } from "../context/StateContext"
+import { useStateContext } from "../../context/StateContext"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons"

@@ -7,7 +7,7 @@ import {
   faCartShopping,
 } from "@fortawesome/free-solid-svg-icons"
 import { Link } from "gatsby"
-import { useStateContext } from "../context/StateContext"
+import { useStateContext } from "../../context/StateContext"
 
 const item = {
   open: {
@@ -26,7 +26,7 @@ const item = {
   },
 }
 
-function Item() {
+function MenuItem() {
   const { toggleOpen, showCart, setShowCart } = useStateContext()
 
   return (
@@ -73,4 +73,4 @@ function Item() {
   )
 }
 
-export default Item
+export default MenuItem

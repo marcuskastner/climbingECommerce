@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { graphql } from "gatsby"
-import Pagination from "../components/Pagination"
+import Pagination from "../components/molecule/Pagination"
 import tw from "twin.macro"
 import StarRatings from "react-star-ratings"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"

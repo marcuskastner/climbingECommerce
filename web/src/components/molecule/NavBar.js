@@ -2,24 +2,25 @@ import React, { useState, useEffect } from "react"
 import tw from "twin.macro"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons"
-import { useStateContext } from "../context/StateContext"
+import { useStateContext } from "../../context/StateContext"
 import { Link } from "gatsby"
-import { MenuToggle } from "./MenuToggle"
+import { SideBarToggle } from "../atom/SideBarToggle"
 import { motion } from "framer-motion"
-import MenuItem from "./MenuItem"
+import SideBarMenu from "../atom/SideBarMenu"
 import Cart from "./Cart"
 function NavBar() {
   const { showCart, setShowCart, isOpen, toggleOpen } = useStateContext()
   const [isDesktop, setDesktop] = useState(window.innerWidth > 650)
 
   const updateMedia = () => {
-    setDesktop(window.innerWidth > 640)
+    setDesktop(window.innerWidth > 650)
   }
 
   useEffect(() => {
     window.addEventListener("resize", updateMedia)
     return () => window.removeEventListener("resize", updateMedia)
   })
+  // On resize checks whether screen width is above 650, if it is above 650 isDesktop will be set to true
 
   const sidebar = {
     open: {
@@ -44,7 +45,7 @@ function NavBar() {
   return (
     <>
       {isDesktop ? (
-        <div tw="flex justify-between px-10 py-2 items-center ">
+        <Wrapper>
           <span tw="font-bold text-lg">CLIMBFREE</span>
           <div tw="flex gap-10 translate-x-[-34%]">
             <span>
@@ -64,7 +65,7 @@ function NavBar() {
             onClick={() => setShowCart(!showCart)}
           />
           <Cart />
-        </div>
+        </Wrapper>
       ) : (
         <>
           <motion.div
@@ -75,8 +76,8 @@ function NavBar() {
             variants={sidebar}
             animate={isOpen ? "open" : "closed"}
           >
-            <MenuToggle toggle={() => toggleOpen()} />
-            <MenuItem />
+            <SideBarToggle toggle={() => toggleOpen()} />
+            <SideBarMenu />
           </motion.div>
           <Cart />
         </>
@@ -86,3 +87,5 @@ function NavBar() {
 }
 
 export default NavBar
+
+const Wrapper = tw.div`flex justify-between px-10 py-2 items-center `
