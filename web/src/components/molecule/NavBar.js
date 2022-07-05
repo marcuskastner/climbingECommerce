@@ -11,9 +11,12 @@ import Cart from "./Cart"
 function NavBar() {
   const { showCart, setShowCart, isOpen, toggleOpen } = useStateContext()
   const [isDesktop, setDesktop] = useState(true)
-  if (typeof window !== "undefined") {
-    setDesktop(window.innerWidth > 650)
-  }
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setDesktop(window.innerWidth > 650)
+    }
+  }, [])
 
   const updateMedia = () => {
     if (typeof window !== `undefined`) {

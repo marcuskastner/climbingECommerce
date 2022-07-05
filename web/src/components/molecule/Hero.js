@@ -4,9 +4,11 @@ import tw from "twin.macro"
 function Hero() {
   const [isDesktop, setDesktop] = useState(true)
 
-  if (typeof window !== "undefined") {
-    setDesktop(window.innerWidth > 650)
-  }
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setDesktop(window.innerWidth > 650)
+    }
+  }, [])
 
   const updateMedia = () => {
     if (typeof window !== "undefined") {
