@@ -10,9 +10,8 @@ import SideBarMenu from "../atom/SideBarMenu"
 import Cart from "./Cart"
 function NavBar() {
   const { showCart, setShowCart, isOpen, toggleOpen } = useStateContext()
+  const [isDesktop, setDesktop] = useState(false)
   if (typeof window !== `undefined`) {
-    const [isDesktop, setDesktop] = useState(window.innerWidth > 650)
-
     const updateMedia = () => {
       setDesktop(window.innerWidth > 650)
     }
