@@ -2,15 +2,19 @@ import React, { useState, useEffect } from "react"
 import tw from "twin.macro"
 
 function Hero() {
-  const [isDesktop, setDesktop] = useState(window.innerWidth > 650)
+  const [isDesktop, setDesktop] = useState(true)
 
   const updateMedia = () => {
-    setDesktop(window.innerWidth > 650)
+    if (typeof window !== "undefined") {
+      setDesktop(window.innerWidth > 650)
+    }
   }
 
   useEffect(() => {
-    window.addEventListener("resize", updateMedia)
-    return () => window.removeEventListener("resize", updateMedia)
+    if (typeof window !== "undefined") {
+      window.addEventListener("resize", updateMedia)
+      return () => window.removeEventListener("resize", updateMedia)
+    }
   })
   return (
     <Wrapper>
