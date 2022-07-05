@@ -28,7 +28,7 @@ const ProductCard = ({ product }) => {
 
 export default ProductCard
 
-const Button = tw.button`sm:(w-[8rem] h-[2.35rem] text-[1rem]) w-[4rem] h-[1.15rem] text-[0.5rem] bg-black text-white font-semibold `
+const Button = tw.button`sm:(w-[8rem] h-[2.35rem] text-[1rem]) w-[4rem] h-[1.15rem] text-[0.5rem] bg-black text-white font-semibold mb-4`
 
 const ProductName = tw.p`sm:(text-lg) m-0 text-sm font-bold`
 
