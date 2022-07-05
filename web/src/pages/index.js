@@ -57,6 +57,7 @@ export const query = graphql`
 const IndexPage = ({ data }) => {
   const products = data.product.edges.map(edge => edge.node)
   const { site, index } = data
+
   const imageData = index.mainImage[0].asset.gatsbyImageData
   const { setShowCart } = useStateContext()
   useEffect(() => setShowCart(false), [])

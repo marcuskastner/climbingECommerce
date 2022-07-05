@@ -10,7 +10,7 @@ import Helmet from "react-helmet"
 
 function Seo({ site }) {
   const { title } = site
-
+  if (typeof title === "undefined") title = "free climbing"
   return <Helmet title={title} />
 }
 
