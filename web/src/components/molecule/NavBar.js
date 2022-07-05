@@ -10,16 +10,18 @@ import SideBarMenu from "../atom/SideBarMenu"
 import Cart from "./Cart"
 function NavBar() {
   const { showCart, setShowCart, isOpen, toggleOpen } = useStateContext()
-  const [isDesktop, setDesktop] = useState(window.innerWidth > 650)
+  if (typeof window !== `undefined`) {
+    const [isDesktop, setDesktop] = useState(window.innerWidth > 650)
 
-  const updateMedia = () => {
-    setDesktop(window.innerWidth > 650)
+    const updateMedia = () => {
+      setDesktop(window.innerWidth > 650)
+    }
+
+    useEffect(() => {
+      window.addEventListener("resize", updateMedia)
+      return () => window.removeEventListener("resize", updateMedia)
+    })
   }
-
-  useEffect(() => {
-    window.addEventListener("resize", updateMedia)
-    return () => window.removeEventListener("resize", updateMedia)
-  })
   // On resize checks whether screen width is above 650, if it is above 650 isDesktop will be set to true
 
   const sidebar = {
