@@ -5,6 +5,8 @@ import { useStateContext } from "../../context/StateContext"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons"
+import StripeCheckout from "./StripeCheckout"
+
 function Cart() {
   const { showCart, cart, setCart } = useStateContext()
 
@@ -56,7 +58,7 @@ function Cart() {
                   </div>
                 </div>
                 <div tw="flex justify-center">
-                  <CheckoutButton>Proceed to Checkout</CheckoutButton>
+                  <StripeCheckout />
                 </div>
               </div>
               {cart.map(item => (
@@ -101,5 +103,3 @@ function Cart() {
 }
 
 export default Cart
-
-const CheckoutButton = tw.button`w-[18rem] h-[3rem] bg-[#215140] text-white`
