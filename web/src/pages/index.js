@@ -35,7 +35,7 @@ export const query = graphql`
           id
           images {
             asset {
-              gatsbyImageData
+              id
             }
           }
           name
@@ -83,4 +83,4 @@ const IndexPage = ({ data }) => {
 
 export default IndexPage
 
-const ProductContainer = tw.div`lg:(flex-row gap-24  ) flex flex-col items-center gap-20 justify-center`
+const ProductContainer = tw.div`md:(grid-cols-2) justify-items-center grid grid-cols-1   gap-20`

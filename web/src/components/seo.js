@@ -9,7 +9,7 @@ import React from "react"
 import Helmet from "react-helmet"
 
 function Seo({ site }) {
-  if (typeof site === "undefined") site = { title: "free climbing" }
+  if (typeof site === "undefined") site = { title: "Free Climb" }
   const { title } = site
 
   return <Helmet title={title} />

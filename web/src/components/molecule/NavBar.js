@@ -8,6 +8,7 @@ import { SideBarToggle } from "../atom/SideBarToggle"
 import { motion } from "framer-motion"
 import SideBarMenu from "../atom/SideBarMenu"
 import Cart from "./Cart"
+import Icon from "../../images/icon.png"
 function NavBar() {
   const { showCart, setShowCart, isOpen, toggleOpen } = useStateContext()
   const [isDesktop, setDesktop] = useState(true)
@@ -57,7 +58,7 @@ function NavBar() {
     <>
       {isDesktop ? (
         <Wrapper>
-          <span tw="font-bold text-lg">CLIMBFREE</span>
+          <img src={Icon} tw="w-8 h-8" />
           <div tw="flex gap-10 translate-x-[-34%]">
             <span>
               <Link tw="no-underline text-[#707070]" to={"/"}>
@@ -66,7 +67,7 @@ function NavBar() {
             </span>
 
             <span>
-              <Link tw="no-underline text-[#707070]" to={"#"}>
+              <Link tw="no-underline text-[#707070]" to={"/shop"}>
                 SHOP
               </Link>
             </span>

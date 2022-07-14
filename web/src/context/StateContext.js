@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react"
+import React, { createContext, useContext, useState, useEffect } from "react"
 import { useCycle } from "framer-motion"
 import tw from "twin.macro"
 const Context = createContext()
@@ -6,6 +6,7 @@ const Context = createContext()
 export const StateContext = ({ children }) => {
   const [showCart, setShowCart] = useState(false)
   const [cart, setCart] = useState([])
+
   const [isOpen, toggleOpen] = useCycle(false, true)
 
   return (

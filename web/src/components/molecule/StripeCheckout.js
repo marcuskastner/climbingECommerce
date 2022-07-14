@@ -6,20 +6,15 @@ const stripePromise = loadStripe(
   "pk_test_51L8U37HXmZLSQcfIXCEKsyUDO0sn1oMZFT8mRVyMfyUwzD5pQ7NVGniCuemv0UUWiLSiB3GMzck1bzfvSBIqAuLT00NtXcnW4R"
 )
 
-function StripeCheckout() {
-  const glasses = {
-    price: "price_1LIbiTHXmZLSQcfIwJDpe1jQ",
-    quantity: 2,
-  }
-
-  const book = {
-    price: "price_1LImU8HXmZLSQcfIUgU2UwW8",
-    quantity: 1,
-  }
+function StripeCheckout({ cart }) {
+  const lineItemsArr = []
+  cart.map(item => {
+    lineItemsArr.push({ price: item.priceId, quantity: item.quantity })
+  })
 
   const checkoutOptions = {
     mode: "payment",
-    lineItems: [glasses, book],
+    lineItems: lineItemsArr,
     successUrl: "http://localhost:8000",
     cancelUrl: "http://localhost:8000",
   }

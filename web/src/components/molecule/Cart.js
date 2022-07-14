@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import tw from "twin.macro"
 import { motion, AnimatePresence } from "framer-motion"
 import { useStateContext } from "../../context/StateContext"
@@ -58,7 +58,7 @@ function Cart() {
                   </div>
                 </div>
                 <div tw="flex justify-center">
-                  <StripeCheckout />
+                  <StripeCheckout cart={cart} />
                 </div>
               </div>
               {cart.map(item => (

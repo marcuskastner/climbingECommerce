@@ -60,5 +60,10 @@ export default {
       type: 'array',
       of: [{ type: 'block' }],
     },
+    {
+      name: 'priceId',
+      title: 'Price ID',
+      type: 'string',
+    },
   ],
 };

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import tw from "twin.macro"
-
+import Logo from "../../images/logo.png"
+import { Link } from "gatsby"
 function Hero() {
   const [isDesktop, setDesktop] = useState(true)
 
@@ -27,10 +28,12 @@ function Hero() {
       {isDesktop ? (
         <>
           <p tw="mb-3 text-[2rem] text-white">Adventure Awaits</p>
-          <Button>SHOP NOW</Button>
+          <Button>
+            <Link to={`/shop`}>SHOP NOW</Link>
+          </Button>
         </>
       ) : (
-        <p tw="mb-3 text-[5vw] text-white">CLIMBFREE</p>
+        <img src={Logo} tw="w-40 rounded-full -translate-y-1/2" />
       )}
     </Wrapper>
   )

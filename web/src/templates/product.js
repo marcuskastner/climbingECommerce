@@ -14,6 +14,7 @@ export const query = graphql`
       price
       rating
       id
+      priceId
       desc {
         children {
           text
@@ -40,11 +41,12 @@ const ProductTemplate = ({ data }) => {
   const [selectedOption, setSelectedOption] = useState(0)
   const [quantity, setQuantity] = useState(1)
   const { cart, setCart, setShowCart } = useStateContext()
+
   useEffect(() => setShowCart(false), [])
   return (
     <div
       className="main_container"
-      tw=" lg:(grid grid-cols-3)gap-10 flex flex-col mt-10 p-4 justify-center"
+      tw=" lg:(grid grid-cols-3)gap-10 flex flex-col mt-10 p-4 justify-center "
     >
       <div className="right" tw="lg:(order-last col-span-1)">
         <h1 tw="text-3xl font-bold mb-4">{Product.name}</h1>
@@ -111,6 +113,7 @@ const ProductTemplate = ({ data }) => {
                 optionName: Product.options[0].optionName,
                 quantity: quantity,
                 price: Product.price,
+                priceId: Product.priceId,
               }
               const matchingArray = cart.filter(
                 cartItem =>
