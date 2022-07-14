@@ -48,46 +48,50 @@ export const query = graphql`
     }
   }
 `
-export const Search = () => {
+export const Search = ({ products, productTypes }) => {
   const { setShowCart } = useStateContext()
-
   useEffect(() => setShowCart(false), [])
-  const options = [
-    { value: "", text: "--Filter by type--" },
-    { value: "apple", text: "Apple 🍏" },
-    { value: "banana", text: "Banana 🍌" },
-    { value: "kiwi", text: "Kiwi 🥝" },
-  ]
 
+  const [filteredProducts, setFilteredProducts] = useState(products)
+
+  // const options = [
+  //   { value: "", text: "--Filter by type--" },
+  //   { value: "apple", text: "Apple 🍏" },
+  //   { value: "banana", text: "Banana 🍌" },
+  //   { value: "kiwi", text: "Kiwi 🥝" },
+  // ]
+
+  let options = productTypes.map(type => {
+    return { value: type.name, text: type.name }
+  })
+  options = [{ value: " ", text: "All Products" }, ...options]
   const [selected, setSelected] = useState(options[0].value)
 
   const handleChange = event => {
-    console.log(event.target.value)
     setSelected(event.target.value)
   }
-
-  return (
-    <SearchContainer>
-      <select value={selected} onChange={handleChange}>
-        {options.map(option => (
-          <option key={option.value} value={option.value}>
-            {option.text}
-          </option>
-        ))}
-      </select>
-    </SearchContainer>
-  )
-}
-
-const shopPage = ({ data }) => {
-  const products = data.product.edges.map(edge => edge.node)
+  useEffect(() => {
+    setFilteredProducts(
+      selected === " "
+        ? products
+        : products.filter(product => product.productType.name === selected)
+    )
+  }, [selected])
 
   return (
     <>
-      <Header tw="font-bold text-2xl">Products Page</Header>
-      <Search />
+      <SearchContainer>
+        <label>Filter products by type: </label>
+        <select value={selected} onChange={handleChange}>
+          {options.map(option => (
+            <option key={option.value} value={option.value}>
+              {option.text}
+            </option>
+          ))}
+        </select>
+      </SearchContainer>
       <ProductContainer>
-        {products.map(product => (
+        {filteredProducts.map(product => (
           <ProductCard product={product} key={product.id} />
         ))}
       </ProductContainer>
@@ -95,9 +99,20 @@ const shopPage = ({ data }) => {
   )
 }
 
+const shopPage = ({ data }) => {
+  const products = data.product.edges.map(edge => edge.node)
+  const productTypes = data.productTypes.edges.map(edge => edge.node)
+  return (
+    <>
+      <Header tw="font-bold text-2xl">Products Page</Header>
+      <Search products={products} productTypes={productTypes} />
+    </>
+  )
+}
+
 export default shopPage
 
-const ProductContainer = tw.div`md:(grid-cols-2) justify-items-center grid grid-cols-1   gap-20`
+const ProductContainer = tw.div`md:(grid-cols-2) justify-items-center grid grid-cols-1   gap-20 mb-20`
 
 const Header = tw.div`font-bold text-2xl mt-20 mb-10`
 

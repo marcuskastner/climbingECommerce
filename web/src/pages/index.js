@@ -21,41 +21,10 @@ export const query = graphql`
         }
       }
     }
-    product: allSanityProduct {
-      edges {
-        node {
-          brand {
-            name
-          }
-          desc {
-            children {
-              text
-            }
-          }
-          id
-          images {
-            asset {
-              id
-            }
-          }
-          name
-          price
-          options {
-            optionName
-            optionValues
-          }
-          rating
-          slug {
-            current
-          }
-        }
-      }
-    }
   }
 `
 
 const IndexPage = ({ data }) => {
-  const products = data.product.edges.map(edge => edge.node)
   const { site, index } = data
 
   const imageData = index.mainImage[0].asset.gatsbyImageData
@@ -71,16 +40,8 @@ const IndexPage = ({ data }) => {
         <GatsbyImage image={imageData} alt="main index image" />
         <Hero />
       </div>
-
-      <ProductContainer>
-        {products.map(product => (
-          <ProductCard product={product} key={product.id} />
-        ))}
-      </ProductContainer>
     </>
   )
 }
 
 export default IndexPage
-
-const ProductContainer = tw.div`md:(grid-cols-2) justify-items-center grid grid-cols-1   gap-20`

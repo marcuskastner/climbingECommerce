@@ -48,7 +48,10 @@ const Pagination = ({ images }) => {
           onClick={() => paginate(-1)}
         />
 
-        <div className="image_container" tw="overflow-hidden ">
+        <div
+          className="image_container"
+          tw="w-[400px] h-[400px] flex justify-center items-center overflow-hidden"
+        >
           <AnimatePresence initial={false} custom={direction} exitBeforeEnter>
             <motion.img
               key={images[imageIndex].asset.id}
@@ -58,6 +61,7 @@ const Pagination = ({ images }) => {
               initial="enter"
               animate="center"
               exit="exit"
+              style={{ maxWidth: "100%", maxHeight: "100%" }}
             />
           </AnimatePresence>
         </div>
@@ -72,17 +76,27 @@ const Pagination = ({ images }) => {
         tw="flex justify-center items-center  gap-4"
       >
         {images.map((image, i) => (
-          <img
-            onClick={() => setPage([i, 1])}
-            src={image.asset.url}
-            alt="smaller image"
-            key={image.asset.id}
+          <div
+            className="image_container"
+            tw="w-[75px] h-[75px] flex justify-center items-center"
             style={
               imageIndex === i
-                ? { border: "2px solid red", width: 75 }
-                : { border: "2px solid white", width: 75 }
+                ? {
+                    border: "2px solid red",
+                  }
+                : {
+                    border: "2px solid white",
+                  }
             }
-          />
+          >
+            <img
+              onClick={() => setPage([i, 1])}
+              src={image.asset.url}
+              alt="smaller image"
+              key={image.asset.id}
+              tw="max-h-full max-w-full"
+            />
+          </div>
         ))}
       </div>
     </div>
@@ -90,5 +104,3 @@ const Pagination = ({ images }) => {
 }
 
 export default Pagination
-
-const Next = tw.div`bg-white rounded-full w-[10%] h-[10%] flex justify-center items-center border-2 border-indigo-700 border-solid text-[10px] `
