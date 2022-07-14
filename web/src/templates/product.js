@@ -22,7 +22,6 @@ export const query = graphql`
       }
       images {
         asset {
-          url
           gatsbyImageData
           id
         }

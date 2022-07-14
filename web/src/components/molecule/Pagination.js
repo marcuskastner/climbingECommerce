@@ -7,6 +7,8 @@ import {
   faCircleArrowLeft,
   faCircleArrowRight,
 } from "@fortawesome/free-solid-svg-icons"
+import { imageUrlFor } from "../../lib/image-url"
+
 const variants = {
   enter: direction => {
     return {
@@ -55,7 +57,7 @@ const Pagination = ({ images }) => {
           <AnimatePresence initial={false} custom={direction} exitBeforeEnter>
             <motion.img
               key={images[imageIndex].asset.id}
-              src={images[imageIndex].asset.url}
+              src={imageUrlFor(images[imageIndex].asset.id)}
               custom={direction}
               variants={variants}
               initial="enter"
@@ -91,7 +93,7 @@ const Pagination = ({ images }) => {
           >
             <img
               onClick={() => setPage([i, 1])}
-              src={image.asset.url}
+              src={imageUrlFor(image.asset.id)}
               alt="smaller image"
               key={image.asset.id}
               tw="max-h-full max-w-full"
