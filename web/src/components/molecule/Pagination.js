@@ -79,6 +79,7 @@ const Pagination = ({ images }) => {
       >
         {images.map((image, i) => (
           <div
+            key={i}
             className="image_container"
             tw="w-[75px] h-[75px] flex justify-center items-center"
             style={

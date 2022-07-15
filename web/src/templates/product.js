@@ -61,6 +61,7 @@ const ProductTemplate = ({ data }) => {
         <div tw="flex gap-4 mb-4">
           {Product.options[0].optionValues.map((value, i) => (
             <div
+              key={i}
               style={
                 selectedOption === i
                   ? {

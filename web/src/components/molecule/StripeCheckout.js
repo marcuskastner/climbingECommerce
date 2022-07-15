@@ -7,9 +7,8 @@ const stripePromise = loadStripe(
 )
 
 function StripeCheckout({ cart }) {
-  const lineItemsArr = []
-  cart.map(item => {
-    lineItemsArr.push({ price: item.priceId, quantity: item.quantity })
+  const lineItemsArr = cart.map(item => {
+    return { price: item.priceId, quantity: item.quantity }
   })
 
   const checkoutOptions = {

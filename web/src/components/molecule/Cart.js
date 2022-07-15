@@ -10,6 +10,10 @@ import StripeCheckout from "./StripeCheckout"
 function Cart() {
   const { showCart, cart, setCart } = useStateContext()
 
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart))
+  }, [cart])
+
   const variants = {
     visible: { opacity: 1 },
     hidden: { opacity: 0 },
@@ -61,10 +65,10 @@ function Cart() {
                   <StripeCheckout cart={cart} />
                 </div>
               </div>
-              {cart.map(item => (
-                <div tw="flex justify-between items-center gap-4 pt-2">
+              {cart.map((item, i) => (
+                <div tw="flex justify-between items-center gap-4 pt-2" key={i}>
                   <div tw="w-[20%]">
-                    <GatsbyImage image={item.image} />
+                    <GatsbyImage image={item.image} alt="item image" />
                   </div>
                   <div tw="flex flex-col w-[70%]">
                     <span>{item.name}</span>
