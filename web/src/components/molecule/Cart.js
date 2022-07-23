@@ -10,9 +10,9 @@ import StripeCheckout from "./StripeCheckout"
 function Cart() {
   const { showCart, cart, setCart } = useStateContext()
 
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart))
-  }, [cart])
+  // useEffect(() => {
+  //   localStorage.setItem("cart", JSON.stringify(cart))
+  // }, [cart])
 
   const variants = {
     visible: { opacity: 1 },

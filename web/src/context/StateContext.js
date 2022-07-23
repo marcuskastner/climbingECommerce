@@ -5,7 +5,7 @@ const Context = createContext()
 
 export const StateContext = ({ children }) => {
   const [showCart, setShowCart] = useState(false)
-  const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart")))
+  const [cart, setCart] = useState({})
   const [isOpen, toggleOpen] = useCycle(false, true)
 
   return (
